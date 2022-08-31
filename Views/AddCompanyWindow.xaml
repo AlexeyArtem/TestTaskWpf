@@ -1,0 +1,16 @@
+﻿<Window x:Class="TestTaskWpf.AddCompanyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestTaskWpf" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="Добавление компании" Height="246.026" WindowStartupLocation="CenterScreen" Style="{StaticResource DialogWindowStyle}">
+    <Window.DataContext>
+        <local:CompanyViewModel></local:CompanyViewModel>
+    </Window.DataContext>
+    <StackPanel Orientation="Vertical" Margin="5">
+        <local:CompanyEditorView DataContext="{Binding}"></local:CompanyEditorView>
+        <Button IsCancel="True" Click="Button_Click" Margin="0, 10, 0, 0" Content="Добавить" Command="{Binding Source={StaticResource MainViewModel}, Path=CompaniesViewModel.AddNewItemCommand}" CommandParameter="{Binding EditableObject}"></Button>
+    </StackPanel>
+</Window>

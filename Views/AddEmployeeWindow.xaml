@@ -1,0 +1,65 @@
+﻿<Window x:Class="TestTaskWpf.AddEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestTaskWpf" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="Добавление сотрудника" Height="450" Style="{StaticResource DialogWindowStyle}" WindowStartupLocation="CenterScreen">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Source={StaticResource MainViewModel}, Path=DepartmentsViewModel.LoadDataCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.DataContext>
+        <local:EmployeeViewModel></local:EmployeeViewModel>
+    </Window.DataContext>
+    <StackPanel Margin="5">
+        <StackPanel>
+            <Label>Фамилия:</Label>
+            <TextBox Text="{Binding Surname}"></TextBox>
+        </StackPanel>
+        <StackPanel>
+            <Label>Имя:</Label>
+            <TextBox Text="{Binding Name}"></TextBox>
+        </StackPanel>
+        <StackPanel>
+            <Label>Отчество:</Label>
+            <TextBox Text="{Binding Patronymic}"></TextBox>
+        </StackPanel>
+        <StackPanel>
+            <Label>Должность:</Label>
+            <TextBox Text="{Binding Appointment}"></TextBox>
+        </StackPanel>
+        <StackPanel>
+            <Label>Дата рождения:</Label>
+            <DatePicker SelectedDate="{Binding BirthDate}"></DatePicker>
+        </StackPanel>
+        <StackPanel>
+            <Label>Дата трудоустройства:</Label>
+            <DatePicker SelectedDate="{Binding EmploymentDate}"></DatePicker>
+        </StackPanel>
+        <StackPanel>
+            <Label>Подразделение:</Label>
+            <ComboBox SelectedItem="{Binding Department}" ItemsSource="{Binding Source={StaticResource MainViewModel}, Path=DepartmentsViewModel.Collection}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} в компании {1}">
+                                    <Binding Path="Title" />
+                                    <Binding Path="Company.Title" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel>
+            <Label>Зарплата:</Label>
+            <TextBox Text="{Binding Salary}"></TextBox>
+        </StackPanel>
+        <Button Margin="0, 10, 0, 0" Click="Button_Click" Command="{Binding Source={StaticResource MainViewModel}, Path=EmployeesViewModel.AddNewItemCommand}" CommandParameter="{Binding EditableObject}" Content="Добавить"></Button>
+    </StackPanel>
+</Window>
