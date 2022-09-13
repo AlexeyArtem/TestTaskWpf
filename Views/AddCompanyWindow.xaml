@@ -11,6 +11,6 @@
     </Window.DataContext>
     <StackPanel Orientation="Vertical" Margin="5">
         <local:CompanyEditorView DataContext="{Binding}"></local:CompanyEditorView>
-        <Button IsCancel="True" Click="Button_Click" Margin="0, 10, 0, 0" Content="Добавить" Command="{Binding Source={StaticResource MainViewModel}, Path=CompaniesViewModel.AddNewItemCommand}" CommandParameter="{Binding EditableObject}"></Button>
+        <Button Click="Button_Click" Margin="0, 10, 0, 0" Content="Добавить" Command="{Binding Source={StaticResource MainViewModel}, Path=CompaniesViewModel.AddNewItemCommand}" CommandParameter="{Binding EditableObject}"></Button>
     </StackPanel>
 </Window>

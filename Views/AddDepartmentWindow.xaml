@@ -5,19 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTaskWpf" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Добавление подразделения" Height="168.757" WindowStartupLocation="CenterScreen" Style="{StaticResource DialogWindowStyle}">
+        Title="Добавление подразделения" Height="253.305" WindowStartupLocation="CenterScreen" Style="{StaticResource DialogWindowStyle}">
     <Window.DataContext>
         <local:DepartmentViewModel></local:DepartmentViewModel>
     </Window.DataContext>
     <StackPanel Margin="5">
-        <StackPanel>
-            <Label>Название:</Label>
-            <TextBox Text="{Binding Title}"></TextBox>
-        </StackPanel>
-        <StackPanel>
-            <Label>Компания:</Label>
-            <ComboBox SelectedItem="{Binding Company}" ItemsSource="{Binding Source={StaticResource MainViewModel}, Path=CompaniesViewModel.Collection}" DisplayMemberPath="Title"></ComboBox>
-        </StackPanel>
+        <local:DepartmentEditorView DataContext="{Binding}"></local:DepartmentEditorView>
         <Button Margin="0, 10, 0, 0" Click="Button_Click" Command="{Binding Source={StaticResource MainViewModel}, Path=DepartmentsViewModel.AddNewItemCommand}" CommandParameter="{Binding EditableObject}" Content="Добавить"></Button>
     </StackPanel>
 </Window>
